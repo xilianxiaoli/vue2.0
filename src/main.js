@@ -10,7 +10,7 @@ var appEntry = require('./app.vue');
 import FastClick from 'fastclick';
 
 //初始化全局css
-require('./commons/styles/app.css');//公用定制css
+require('./commons/styles/app.scss');//公用定制css
 
 //初始化XMLHttpRequest RestfulAPI
 Vue.use(require('vue-resource'));
@@ -73,6 +73,6 @@ router.beforeEach(function(to, from, next) {
 });
 
 router.afterEach(function() {
-  
+
 });
 

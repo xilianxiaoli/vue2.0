@@ -1,7 +1,21 @@
 var path = require('path')
 var config = require('../config')
-var utils = require('./utils')
+// var utils = require('./utils')
+var webpack = require("webpack");
+
 var projectRoot = path.resolve(__dirname, '../')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+//webpack插件
+var plugins = [
+  //提公用js到common.js文件中
+  // new webpack.optimize.CommonsChunkPlugin('common.js'),
+  //将样式统一发布到style.css中
+  new ExtractTextPlugin("style.css", {
+    allChunks: true,
+    disable: false
+  })
+];
 
 module.exports = {
   entry: {
@@ -13,6 +27,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
+    // require时省略的扩展名，如：require('module') 不需要module.js
     extensions: ['', '.js', '.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
@@ -41,29 +56,23 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+          "style-loader", 'css-loader?sourceMap!sass-loader!cssnext-loader')
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
+        test: /\.css$/,
+        loader: 'css-loader!autoprefixer-loader?browsers=last 2 versions'
       }
     ]
   },
-  vue: {
-    loaders: utils.cssLoaders(),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
-  }
+  // vue: {
+  //   loaders: utils.cssLoaders()
+  //   // postcss: [
+  //   //   require('autoprefixer')({
+  //   //     browsers: ['last 2 versions']
+  //   //   })
+  //   // ]
+  // },
+  plugins: plugins
 }

@@ -1,4 +1,4 @@
-<style>
+<style style="sass">
   a {
     display: block;
   }
@@ -6,18 +6,24 @@
   .code {
     display: block;
   }
+  .btnaaa{
+    border-radius: 10px;
+    transition :transform 1s;
+    display: flex
+  }
 </style>
 <template>
   <div>
-    <div>this is comm child two</div>
+    <div class="app">this is comm child two</div>
     <button @click="toSiblings()">sibling</button>
 
-    <button @click="_post()">Post</button>
+    <button class="btnaaa" @click="_post()">Post</button>
 
 
   </div>
 </template>
 <script>
+  require('src/commons/styles/app.scss')
   import eventHub from '../../eventHub'
   export default{
     data(){
