@@ -14,7 +14,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   // },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
-    path: config.build.assetsRoot,
+    path: config.build.assetsRoot, // html,css,js,图片等资源文件的输出路径
+    publicPath:'/js/usen/dist/',  // html,css,js,图片等资源文件的server上的路径
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
