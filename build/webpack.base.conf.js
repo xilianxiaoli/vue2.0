@@ -1,21 +1,10 @@
 var path = require('path')
 var config = require('../config')
-// var utils = require('./utils')
 var webpack = require("webpack");
 
 var projectRoot = path.resolve(__dirname, '../')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-//webpack插件
-var plugins = [
-  //提公用js到common.js文件中
-  // new webpack.optimize.CommonsChunkPlugin('common.js'),
-  //将样式统一发布到style.css中
-  new ExtractTextPlugin("style.css", {
-    allChunks: true,
-    disable: false
-  })
-];
 
 module.exports = {
   entry: {
@@ -65,14 +54,5 @@ module.exports = {
         loader: 'css-loader!autoprefixer-loader?browsers=last 2 versions'
       }
     ]
-  },
-  // vue: {
-  //   loaders: utils.cssLoaders()
-  //   // postcss: [
-  //   //   require('autoprefixer')({
-  //   //     browsers: ['last 2 versions']
-  //   //   })
-  //   // ]
-  // },
-  plugins: plugins
+  }
 }
